@@ -117,3 +117,48 @@ img_node* g_data_head;      /* global pointer to data image              */
 
 
 /* == Functions Declerations == */
+
+/*--First Read --*/
+void first_read(FILE* file, line_node** line_head_list, int* error_cout, int* line_count, int* IC, int* DC);
+void update_label_address(line_node* line_list_head, int* IC);
+int op_type(line_node* line_list_head, line_node* curr_line_node, char* token);
+
+
+/*--Second Read --*/
+void second_read(line_node* line_head_list, extern_list** extern_list_head, label_node* label_head_list, int* error_count);
+
+/*-- Utilities  --*/
+void cpy_num2data_list(int num, img_node* new_img_node, int isReg);
+int is_external_label(label_node* label_list_head, char* token);
+int is_label(char* token);
+void add_opcode_and_funct(int cmd_idx, img_node* curr_inst_node);
+int search_cmd(char* p_token);
+void insert_label(line_node* curr_line_node, char* type, int DC, int extern_entry);
+line_node* insert_set2line_list(line_node** line_node_head, int* line_count, char*** token_set, int* token_count);
+int is_comment_empty(char* tmp_line, int* line_count);
+void add_addressing_and_registers(img_node* curr_inst_node, int op_count, int adr_val, int reg_val);
+int is_register_addressing(line_node* curr_line_node, char* token);
+int is_label_ext(line_node* line_list_head, char* token);
+int is_relative_addressing(line_node* line_list_head, char* token);
+int is_immidiate_addressing(line_node* curr_line_node, char* token);
+int is_direct_addressing(char* token);
+char* get_label(line_node* curr_line_node);
+int dirc_type(line_node* curr_line_node);
+int is_label_decleration(line_node* curr_line_node);
+void print_error(int line_num, const char* format, ...);
+void load_file(char* file_name);
+FILE* file_open(char* file_name, char* file_type, char* mode);
+
+/*-- Linked_List --*/
+void create_extern_node(extern_list** extern_list_head, char* token, img_node* curr_inst_node);
+label_node* create_label_list(line_node* line_head_list);
+void add_num2data_list(char* token, int* IC, char ARE, int isReg);
+void insert_int2data_list(int* DC, line_node* curr_line_node);
+void insert_string2data_list(int* DC, line_node* curr_line_node);
+void create_data_node(int* DC, int tok_chr);
+line_node* create_line_node(line_node** head);
+void create_label_node(line_node*);
+int next_node(line_node* curr_node);
+img_node* create_inst_node(int* IC);
+
+#endif
